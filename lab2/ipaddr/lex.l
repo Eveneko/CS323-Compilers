@@ -4,8 +4,11 @@
 %}
 %option noyywrap
 
-v4 "WRITE YOUR REGULAR EXPRESSIONS HERE"
-v6 "ADD ANY SUB-PATTERNS AS YOU WANT"
+chunk_v4 = "([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])"
+chunk_v6 = "([0-9a-fA-F]{1,4})"
+
+v4 "(chunk_v4:){3}(chunk_v4)"
+v6 "(chunk_v6:){7}(chunk_v6)"
 
 %%
 {v4} { indicator = 4; }
