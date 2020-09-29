@@ -4,7 +4,7 @@
 %}
 
 %token LC RC LB RB COLON COMMA
-%token STRING NUMBER
+%token STRING NUMBER LEADZERO
 %token TRUE FALSE VNULL
 %%
 
@@ -18,6 +18,7 @@ Value:
     | Array
     | STRING
     | NUMBER
+    | LEADZERO error { puts("leading zero, recovered"); }
     | TRUE
     | FALSE
     | VNULL

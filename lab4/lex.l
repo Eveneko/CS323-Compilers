@@ -11,7 +11,8 @@ string \"({esc}|{scp})*\"
 int 0|[1-9][0-9]*
 frac \.[0-9]+
 exp [Ee][+-]?[0-9]+
-number ^-?{int}{frac}?{exp}?$
+number -?{int}{frac}?{exp}?
+leadzero -?0{int}{frac}?{exp}?
 
 empty [ \n\r\t]
 
@@ -30,6 +31,7 @@ empty [ \n\r\t]
 
 {string} { return STRING; }
 {number} { return NUMBER; }
+{leadzero} { return LEADZERO; }
 
 {empty} {}
 
