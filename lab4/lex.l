@@ -11,7 +11,7 @@ string \"({esc}|{scp})*\"
 int 0|[1-9][0-9]*
 frac \.[0-9]+
 exp [Ee][+-]?[0-9]+
-number -?{int}{frac}?{exp}?
+number ^-?{int}{frac}?{exp}?$
 
 empty [ \n\r\t]
 

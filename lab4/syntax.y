@@ -10,6 +10,8 @@
 
 Json:
       Value
+    | Value COMMA error { puts("Comma after the close, recovered"); }
+    | Value RB error { puts("Extra close, recovered"); }
     ;
 Value:
       Object
@@ -23,8 +25,8 @@ Value:
 Object:
       LC RC
     | LC Members RC
-    | LC Members COMMA error { puts("Comma instead if closing brace, recovered"); }
-    | LC Members RC STRING error { puts("misplaced quoted value"); }
+    // | LC Members COMMA error { puts("Comma instead if closing brace, recovered"); } //conflict
+    | LC Members RC Value error { puts("misplaced quoted value, recovered"); }
     ;
 Members:
       Member
@@ -34,22 +36,20 @@ Members:
 Member:
       STRING COLON Value
     | STRING Value error { puts("Missing colon, recovered"); }
-    | STRING COMMA Value error { puts("Missing colon, recovered"); }
-    | STRING COMMA COMMA Value error { puts("Double colon, recovered"); }
+    | STRING COLON COLON Value error { puts("Double colon, recovered"); }
+    | STRING COMMA Value error { puts("Comma install of colon, recovered"); }
     ;
 Array:
       LB RB
     | LB Values RB
-    | LB Values RC error { puts("unmatched right bracket, recovered"); }
-    | LB Values RB COMMA error { puts("Comma after the close, recovered"); }
     | LB Values error { puts("Unclosed array, recovered"); }
-    | LB Values RB RB error { puts("Extra close, recovered"); }
+    | LB Values RC error { puts("mismatch, recovered"); }
     ;
 Values:
       Value
     | Value COMMA Values
     | Value COMMA error { puts("Extra comma, Values, recovered"); }
-    | Value COMMA COMMA error { puts("double, recovered"); }
+    | Value COMMA COMMA error { puts("double extra comma, recovered"); }
     | Value COLON Values error { puts("Colon instead of comma, recovered"); }
     | COMMA Value error { puts("missing value, recovered"); }
     ;
