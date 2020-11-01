@@ -6,8 +6,8 @@ import subprocess
 DATA = pathlib.Path('data')
 
 
-def jsonparser_output(json_file):
-    out = subprocess.check_output(['./jp.out', json_file])
+def jsonparser_output(jsondeffile):
+    out = subprocess.check_output(['./jp.out', jsondeffile])
     return out.decode().strip()
 
 
