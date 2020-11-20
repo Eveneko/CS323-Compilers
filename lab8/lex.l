@@ -1,5 +1,7 @@
 %{
     #include"syntax.tab.h"
+    #include"json_define.c"
+
 %}
 %option noyywrap
 
@@ -24,11 +26,17 @@ empty [ \n\r\t]
 ":" { return COLON; }
 "," { return COMMA; }
 
-"true" { return TRUE; }
-"false" { return FALSE; }
-"null" { return VNULL; }
+"true" { yylval.boolean = 1; return TRUE; }
+"false" { yylval.boolean = 0; return FALSE; }
+"null" { yylval.json = createJson(); return VNULL; }
 
-{string} { return STRING; }
-{number} { return NUMBER; }
+{string} { 
+    memset(yylval.string, '\0', sizeof(yytext));
+    strcpy(yylval.string, yytext);
+    return STRING; 
+}
+{number} { yylval.number = atof(yytext); return NUMBER; }
 
 {empty} {}
+
+. { printf("lexical error: %s\n", yytext); }
