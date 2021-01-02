@@ -3,8 +3,8 @@ from pwn import *
 # context.terminal = ['tmux', 'split', '-h']   # for debug
 # context.log_level = 'debug'
 
-p = process('./hack')     # use this tube on your local machine
-# p = remote('10.20.38.233', 23454)   # use this for remote attack
+# p = process('./hack')     # use this tube on your local machine
+p = remote('10.20.38.233', 23454)   # use this for remote attack
 
 p.recvuntil('cheater1: 0x')
 bdoor = int(p.recvline(), 16)

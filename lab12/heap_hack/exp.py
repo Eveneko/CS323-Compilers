@@ -4,7 +4,7 @@ from pwn import *
 # context.log_level = 'debug'
 
 p = process('./hack')
-# p = remote('127.0.0.1', 23455)
+# p = remote('10.20.38.233', 23455)
 
 def addi(size, content):
     p.sendlineafter('choice>', '1')
